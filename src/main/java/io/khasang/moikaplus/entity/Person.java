@@ -19,7 +19,4 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = EAGER)
-    private List<Phone> phones = new ArrayList<>();
-
 }

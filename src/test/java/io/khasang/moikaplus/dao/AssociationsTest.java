@@ -1,4 +1,5 @@
 package io.khasang.moikaplus.dao;
+// существует как образец кода. Потом выбросить
 
 import io.khasang.moikaplus.SpringBootWebApplication;
 import io.khasang.moikaplus.entity.City;
@@ -46,7 +47,7 @@ public class AssociationsTest {
         phoneRepository.deleteAll();
         personRepository.deleteAll();
         for (int i = 0; i <2 ; i++) {
-            phones[i] = new Phone(0l, "000000000"+Integer.toString(i+1) );
+//            phones[i] = new Phone(0l, "000000000"+Integer.toString(i+1) );
             phones[i] = phoneRepository.save(phones[i]);
         }
 
@@ -56,7 +57,7 @@ public class AssociationsTest {
         for (int i = 0; i <2 ; i++) {
             phones[i] = phoneRepository.findOne(phones[i].getId());
             person = personRepository.findOne(person.getId());
-            person.getPhones().add(phones[i]);
+//            person.getPhones().add(phones[i]);
             person = personRepository.save(person);
         }
 

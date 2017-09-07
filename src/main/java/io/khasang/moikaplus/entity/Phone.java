@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+// Вариант ManyToOne
 @Entity
 @Data
 @AllArgsConstructor
@@ -15,5 +15,8 @@ public class Phone {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String number;
+    @ManyToOne
+    @JoinColumn(name = "person_id", foreignKey = @ForeignKey(name = "PERSON_ID_FK")
+    )
+    private Person person;
 }
-
