@@ -3,8 +3,6 @@ package io.khasang.moikaplus.dao;
 import io.khasang.moikaplus.SpringBootWebApplication;
 import io.khasang.moikaplus.entity.Person;
 import io.khasang.moikaplus.entity.Phone;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +16,9 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringBootWebApplication.class)
-@Transactional
-@Rollback
-public class ManyToOneTest {
+//@Transactional
+//@Rollback
+public class OneToManyBidirectTest {
 
     @Autowired
     PersonRepository personRepository;
@@ -28,27 +26,46 @@ public class ManyToOneTest {
     PhoneRepository phoneRepository;
 
     Person person;
-    Phone [] phones = new Phone[2];
     List<Person> personList = new ArrayList<>();
     List<Phone> phoneList = new ArrayList<>();
 
     @Test
-    public void ManyToOne() throws Exception {
+    public void OneToManyBidirect() throws Exception {
         phoneRepository.deleteAll();
         personRepository.deleteAll();
 
-//        Person person = new Person(0l,"Ivanov");
+        Person person = new Person();
+        person.setName("Ivanov");
+        phoneList.add(new Phone(0l,"001",person));
+        phoneList.add(new Phone(0l,"002",person));
+        person.setPhones(phoneList);
         person = personRepository.save(person);
-        for (int i = 0; i <2 ; i++) {
-            phones[i] = new Phone(0l, "000000000"+Integer.toString(i+1),person );
-            phones[i] = phoneRepository.save(phones[i]);
-        }
 
-
-//        personList.clear();
-//        phoneList.clear();
+        personList.clear();
+        phoneList.clear();
         personRepository.findAll().forEach(personList::add);
         phoneRepository.findAll().forEach(phoneList::add);
     }
 
 }
+
+//    BookCategory categoryA = new BookCategory("Category A");
+//    Set bookAs = new HashSet<Book>(){{
+//        add(new Book("Book A1", categoryA));
+//        add(new Book("Book A2", categoryA));
+//        add(new Book("Book A3", categoryA));
+//    }};
+//        categoryA.setBooks(bookAs);
+//
+//                BookCategory categoryB = new BookCategory("Category B");
+//                Set bookBs = new HashSet<Book>(){{
+//        add(new Book("Book B1", categoryB));
+//        add(new Book("Book B2", categoryB));
+//        add(new Book("Book B3", categoryB));
+//        }};
+//        categoryB.setBooks(bookBs);
+//
+//        bookCategoryRepository.save(new HashSet<BookCategory>() {{
+//        add(categoryA);
+//        add(categoryB);
+//        }});

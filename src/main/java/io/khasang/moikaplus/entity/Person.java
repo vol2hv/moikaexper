@@ -19,4 +19,16 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
+    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL, orphanRemoval = true, fetch = EAGER)
+    private List<Phone> phones = new ArrayList<>();
+
+    public void addPhone(Phone phone) {
+        phones.add( phone );
+        phone.setPerson( this );
+    }
+
+    public void removePhone(Phone phone) {
+        phones.remove( phone );
+        phone.setPerson( null );
+    }
 }
