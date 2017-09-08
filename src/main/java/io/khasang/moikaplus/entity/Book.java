@@ -1,4 +1,4 @@
-package com.hellokoding.jpa.model;
+package io.khasang.moikaplus.entity;
 
 import javax.persistence.*;
 
