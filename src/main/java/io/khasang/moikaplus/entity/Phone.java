@@ -16,7 +16,9 @@ public class Phone {
     private Long id;
     private String number;
     @ManyToOne
-    @JoinColumn(name = "person_id", foreignKey = @ForeignKey(name = "PERSON_ID_FK")
-    )
     private Person person;
+
+    public Phone(String number) {
+        this.number = number;
+    }
 }

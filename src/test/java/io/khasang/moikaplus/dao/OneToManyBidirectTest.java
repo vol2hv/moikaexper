@@ -16,7 +16,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringBootWebApplication.class)
-//@Transactional
+@Transactional
 //@Rollback
 public class OneToManyBidirectTest {
 
@@ -36,9 +36,10 @@ public class OneToManyBidirectTest {
 
         Person person = new Person();
         person.setName("Ivanov");
-        phoneList.add(new Phone(0l,"001",person));
-        phoneList.add(new Phone(0l,"002",person));
-        person.setPhones(phoneList);
+        person.addPhone(new Phone(0l,"001",person));
+//        phoneList.add(new Phone(0l,"001",person));
+//        phoneList.add(new Phone(0l,"002",person));
+//        person.setPhones(phoneList);
         person = personRepository.save(person);
 
         personList.clear();
