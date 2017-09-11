@@ -30,12 +30,12 @@ public class OneToManyBidirectTest {
     List<Phone> phoneList = new ArrayList<>();
 
     @Test
+    @Transactional
     public void OneToManyBidirect() throws Exception {
         phoneRepository.deleteAll();
         personRepository.deleteAll();
 
-        Person person = new Person();
-        person.setName("Ivanov");
+        Person person = new Person("Ivanov");
         person.addPhone(new Phone(0l,"001",person));
 //        phoneList.add(new Phone(0l,"001",person));
 //        phoneList.add(new Phone(0l,"002",person));
@@ -50,23 +50,3 @@ public class OneToManyBidirectTest {
 
 }
 
-//    BookCategory categoryA = new BookCategory("Category A");
-//    Set bookAs = new HashSet<Book>(){{
-//        add(new Book("Book A1", categoryA));
-//        add(new Book("Book A2", categoryA));
-//        add(new Book("Book A3", categoryA));
-//    }};
-//        categoryA.setBooks(bookAs);
-//
-//                BookCategory categoryB = new BookCategory("Category B");
-//                Set bookBs = new HashSet<Book>(){{
-//        add(new Book("Book B1", categoryB));
-//        add(new Book("Book B2", categoryB));
-//        add(new Book("Book B3", categoryB));
-//        }};
-//        categoryB.setBooks(bookBs);
-//
-//        bookCategoryRepository.save(new HashSet<BookCategory>() {{
-//        add(categoryA);
-//        add(categoryB);
-//        }});
