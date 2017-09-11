@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringBootWebApplication.class)
 @Transactional
+@Commit
 //@Rollback
 public class OneToManyBidirectTest {
 
@@ -35,11 +37,13 @@ public class OneToManyBidirectTest {
         phoneRepository.deleteAll();
         personRepository.deleteAll();
 
-        Person person = new Person("Ivanov");
-        person.addPhone(new Phone(0l,"001",person));
-//        phoneList.add(new Phone(0l,"001",person));
-//        phoneList.add(new Phone(0l,"002",person));
-//        person.setPhones(phoneList);
+        Person person = new Person("Ali Baba");
+//        person = personRepository.save(person);
+//        person = personRepository.findOne(person.getId());
+        for (int i = 0; i < 3 ; i++) {
+            person.addPhone(new Phone(null,"xxx" + i,person));
+        }
+
         person = personRepository.save(person);
 
         personList.clear();
