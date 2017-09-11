@@ -19,8 +19,12 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL, orphanRemoval = true, fetch = EAGER)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Phone> phones = new ArrayList<>();
+
+    public Person(String name) {
+        this.name = name;
+    }
 
     public void addPhone(Phone phone) {
         phones.add( phone );

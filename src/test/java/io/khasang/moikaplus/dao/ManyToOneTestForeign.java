@@ -48,11 +48,12 @@ public class ManyToOneTestForeign {
             add(new Book("Book B3", categoryB));
         }};
         categoryB.setBooks(bookBs);
+        bookCategoryRepository.save(categoryA);
 
-        bookCategoryRepository.save(new HashSet<BookCategory>() {{
-            add(categoryA);
-            add(categoryB);
-        }});
+//        bookCategoryRepository.save(new HashSet<BookCategory>() {{
+//            add(categoryA);
+//            add(categoryB);
+//        }});
 
         // fetch all categories
         for (BookCategory bookCategory : bookCategoryRepository.findAll()) {
