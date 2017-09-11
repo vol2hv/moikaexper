@@ -36,18 +36,18 @@ public class OneToManyBidirectEMTest {
     public void OneToManyBidirect() throws Exception {
         entityManager.clear();
 
-        Person person = new Person("Мадорин");
-        Phone phone1 = new Phone( "123-456-7890" );
-        Phone phone2 = new Phone( "321-654-0987" );
-
-        person.addPhone( phone1 );
-        person.addPhone( phone2 );
-        entityManager.persist( person );
-        entityManager.flush();
-
-        person.removePhone( phone1 );
-        entityManager.flush();
-        entityManager.close();
+//        Person person = new Person("Мадорин");
+//        Phone phone1 = new Phone( "123-456-7890" );
+//        Phone phone2 = new Phone( "321-654-0987" );
+//
+//        person.addPhone( phone1 );
+//        person.addPhone( phone2 );
+//        entityManager.persist( person );
+//        entityManager.flush();
+//
+//        person.removePhone( phone1 );
+//        entityManager.flush();
+//        entityManager.close();
 
 
     }

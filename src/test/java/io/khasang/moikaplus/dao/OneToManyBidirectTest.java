@@ -34,22 +34,21 @@ public class OneToManyBidirectTest {
     @Test
     @Transactional
     public void OneToManyBidirect() throws Exception {
-        phoneRepository.deleteAll();
-        personRepository.deleteAll();
-
-        Person person = new Person("Ali Baba");
+//        phoneRepository.deleteAll();
+//        personRepository.deleteAll();
+//
+//        Person person = new Person("Ali Baba");
+//
+//        for (int i = 0; i < 3 ; i++) {
+//            person.addPhone(new Phone(null,"xxx" + i,person));
+//        }
+//
 //        person = personRepository.save(person);
-//        person = personRepository.findOne(person.getId());
-        for (int i = 0; i < 3 ; i++) {
-            person.addPhone(new Phone(null,"xxx" + i,person));
-        }
-
-        person = personRepository.save(person);
-
-        personList.clear();
-        phoneList.clear();
-        personRepository.findAll().forEach(personList::add);
-        phoneRepository.findAll().forEach(phoneList::add);
+//
+//        personList.clear();
+//        phoneList.clear();
+//        personRepository.findAll().forEach(personList::add);
+//        phoneRepository.findAll().forEach(phoneList::add);
     }
 
 }

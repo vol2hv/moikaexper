@@ -15,8 +15,6 @@ public class Phone {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String number;
-    @ManyToOne
-    private Person person;
 
     public Phone(String number) {
         this.number = number;
