@@ -3,6 +3,7 @@ package io.khasang.moikaplus.dao;
 import io.khasang.moikaplus.SpringBootWebApplication;
 import io.khasang.moikaplus.entity.Person;
 import io.khasang.moikaplus.entity.Phone;
+import io.khasang.moikaplus.entity.PhoneDetails;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,36 +20,25 @@ import java.util.List;
 @Transactional
 @Commit
 //@Rollback
-public class OneToManyTest {
+public class OneToOneTest {
 
-    @Autowired
-    PersonRepository personRepository;
     @Autowired
     PhoneRepository phoneRepository;
-
-    Person person;
-    List<Person> personList = new ArrayList<>();
-    List<Phone> phoneList = new ArrayList<>();
+    @Autowired
+    PhoneDetailRepository phoneDetailRepository;
 
     @Test
     @Transactional
-    public void OneToMany() throws Exception {
-//        phoneRepository.deleteAll();
-//        personRepository.deleteAll();
-//
-//        Person person = new Person("Baba Yaga");
-//
-//            for (int i = 0; i < 3 ; i++) {
-//                person.getPhones().add(new Phone("xxx"+i));
-//            }
-//
-//        person = personRepository.save(person);
-//
-//        personList.clear();
-//        phoneList.clear();
-//        personRepository.findAll().forEach(personList::add);
-//        phoneRepository.findAll().forEach(phoneList::add);
-    }
+    public void OneToOne() throws Exception {
+        phoneRepository.deleteAll();
+        phoneDetailRepository.deleteAll();
 
+        PhoneDetails  phoneDetails = new PhoneDetails("Provider1","Technology1");
+        phoneDetails = phoneDetailRepository.save(phoneDetails);
+        Phone phone = new Phone("zzz002",phoneDetails);
+        phone = phoneRepository.save(phone);
+        phone = phoneRepository.findOne(phone.getId());
+        phone.getDetails().getProvider();
+    }
 }
 

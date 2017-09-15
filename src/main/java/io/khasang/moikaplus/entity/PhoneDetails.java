@@ -10,16 +10,15 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Phone {
+public class PhoneDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String number;
-    @OneToOne
-    private PhoneDetails details;
+    private String provider;
+    private String technology;
 
-    public Phone(String number, PhoneDetails details) {
-        this.number = number;
-        this.details = details;
+    public PhoneDetails(String provider, String technology) {
+        this.provider = provider;
+        this.technology = technology;
     }
 }
