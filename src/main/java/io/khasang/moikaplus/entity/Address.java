@@ -8,21 +8,20 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.FetchType.EAGER;
-
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Person {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String name;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Address> addresses = new ArrayList<>();
+    private String street;
+    private String number;
 
-    public Person(String name) {
-        this.name = name;
+    public Address(String street, String number) {
+        this.street = street;
+        this.number = number;
     }
 }
+
