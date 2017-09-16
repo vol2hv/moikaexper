@@ -16,6 +16,8 @@ public class PhoneDetails {
     private Long id;
     private String provider;
     private String technology;
+    @OneToOne(fetch = FetchType.LAZY)
+    private Phone phone;
 
     public PhoneDetails(String provider, String technology) {
         this.provider = provider;

@@ -15,11 +15,34 @@ public class Phone {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String number;
-    @OneToOne
+    @OneToOne(mappedBy = "phone", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private PhoneDetails details;
+
+    public Phone(String number) {
+        this.number = number;
+    }
 
     public Phone(String number, PhoneDetails details) {
         this.number = number;
         this.details = details;
+    }
+    public void addDetails(PhoneDetails details) {
+        details.setPhone( this );
+        this.details = details;
+    }
+
+    public void removeDetails() {
+        if ( details != null ) {
+            details.setPhone( null );
+            this.details = null;
+        }
+    }
+    @Override
+    public String toString(){
+        String result = String.format("Phone[id=%d, number=%s ",id, number);
+        if (details != null) {
+            result += String.format("Provider=%s,Technology=%s ",details.getProvider(), details.getTechnology());
+        }
+        return result +"]\n";
     }
 }
