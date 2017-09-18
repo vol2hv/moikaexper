@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,15 +14,15 @@ import java.util.Objects;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address {
+public class Address  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String street;
     private String number;
     private String postalCode;
-    @ManyToMany(mappedBy = "addresses")
-    private List<Person> persons = new ArrayList<>();
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PersonAddress> owners = new ArrayList<>();
 
     public Address(String street, String number, String postalCode) {
         this.street = street;
@@ -46,5 +47,4 @@ public class Address {
     public int hashCode() {
         return Objects.hash( street, number, postalCode );
     }
-
 }

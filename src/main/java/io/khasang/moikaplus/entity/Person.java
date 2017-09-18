@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,15 +17,15 @@ import static javax.persistence.FetchType.EAGER;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Person {
+public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @NaturalId
     private String registrationNumber;
     private String name;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Address> addresses = new ArrayList<>();
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PersonAddress> addresses = new ArrayList<>();
 
     public Person(String registrationNumber, String name) {
         this.registrationNumber = registrationNumber;
@@ -32,13 +33,17 @@ public class Person {
     }
 
     public void addAddress(Address address) {
-        addresses.add( address );
-        address.getPersons().add( this );
+        PersonAddress personAddress = new PersonAddress( this, address );
+        addresses.add( personAddress );
+        address.getOwners().add( personAddress );
     }
 
     public void removeAddress(Address address) {
-        addresses.remove( address );
-        address.getPersons().remove( this );
+        PersonAddress personAddress = new PersonAddress( this, address );
+        address.getOwners().remove( personAddress );
+        addresses.remove( personAddress );
+        personAddress.setPerson( null );
+        personAddress.setAddress( null );
     }
     @Override
     public boolean equals(Object o) {
@@ -56,4 +61,5 @@ public class Person {
     public int hashCode() {
         return Objects.hash( registrationNumber );
     }
+
 }
