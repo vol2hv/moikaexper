@@ -28,20 +28,20 @@ public class ManyToManyBidirectTest {
 
     @Test
     public void ManyToMany() throws Exception {
-        Person person1 = new Person("ABC-123", "Мадорин");
-        Person person2 = new Person("DEF-456", "Путин");
-
-        Address address1 = new Address("12th Avenue", "12A", "4005A");
-        Address address2 = new Address("18th Avenue", "18B", "4007B");
-
-        person1.addAddress(address1);
-        person1.addAddress(address2);
-
-        person2.addAddress(address1);
-
-        personRepository.save(person1);
-        personRepository.save(person2);
-        person1.removeAddress(address1);
+//        Person person1 = new Person("ABC-123", "Мадорин");
+//        Person person2 = new Person("DEF-456", "Путин");
+//
+//        Address address1 = new Address("12th Avenue", "12A", "4005A");
+//        Address address2 = new Address("18th Avenue", "18B", "4007B");
+//
+//        person1.addAddress(address1);
+//        person1.addAddress(address2);
+//
+//        person2.addAddress(address1);
+//
+//        personRepository.save(person1);
+//        personRepository.save(person2);
+//        person1.removeAddress(address1);
 //        logger.info(person1.toString());
 //        logger.info(person2.toString());
 

@@ -1,9 +1,10 @@
 package io.khasang.moikaplus.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Book{
+public class Book implements Serializable {
     private int id;
     private String name;
     private BookCategory bookCategory;
